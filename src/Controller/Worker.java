@@ -1,17 +1,19 @@
 package Controller;
 
-import Model.Customer;
-import Model.Parcel;
 
 
 public class Worker {
     
      // Calculate the fee based on parcel weight and days in the depot
-    public double calculateFee(Parcel parcel) {
-        double baseRate = 10.0; // Base rate per kg
-        double dailyCharge = 2.0; // Daily charge for storage
-
-        return (parcel.getWeight() * baseRate) + (parcel.getDaysinDepot() * dailyCharge);
+        public static double calculateFee(double weight, int daysInDepot) {
+      
+        double ratePerKg = 5.0;
+        double dailyRate = 2.0;
+        
+        // Calculate fee: (weight * rate) + (days * daily rate)
+        double fee = (weight * ratePerKg) + (daysInDepot * dailyRate);
+        
+        return fee;
     }
 
     // Operate on a customer (example operation)

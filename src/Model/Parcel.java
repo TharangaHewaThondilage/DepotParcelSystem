@@ -20,6 +20,14 @@ public class Parcel {
         this.collected =false;
     }
 
+    public Parcel( float weight, int DaysinDepot) {
+       
+        this.weight = weight;
+        this.DaysinDepot = DaysinDepot;
+    }
+    
+    
+
     public String getParcelID() {
         return ParcelID;
     }

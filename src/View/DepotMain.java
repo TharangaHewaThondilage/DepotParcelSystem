@@ -21,6 +21,7 @@ public class DepotMain extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         customerQueuePanel1 = new View.CustomerQueuePanel();
         jPanel3 = new javax.swing.JPanel();
+        currentParcelPanel1 = new View.CurrentParcelPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -39,8 +40,11 @@ public class DepotMain extends javax.swing.JFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, 440, 450));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "CurrentParcelPanel", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Segoe UI", 1, 12))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(currentParcelPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 910, 130));
+
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 480, 940, 160));
 
         pack();
@@ -82,6 +86,7 @@ public class DepotMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private View.CurrentParcelPanel currentParcelPanel1;
     private View.CustomerQueuePanel customerQueuePanel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

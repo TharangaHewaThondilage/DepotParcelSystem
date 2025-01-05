@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import View.DepotMain;
 import java.io.FileWriter;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
