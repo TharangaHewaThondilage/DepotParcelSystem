@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Model/CustomerQueue.java</file>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Model/Parcel.java</file>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Model/Customer.java</file>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Model/ParcelMap.java</file>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Model/logBook.java</file>
+            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/View/DepotMain.java</file>
+            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/View/addParcelDetails.java</file>
+            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/View/ParcelsToProcessPanel.java</file>
+            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/View/CustomerQueuePanel.java</file>
+            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/resources/Parcels.csv</file>
             <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Controller/Manager.java</file>
-            <file>file:/C:/Users/Prasad/OneDrive%20-%20Sri%20Lanka%20Institute%20of%20Information%20Technology/Documents/NetBeansProjects/DepotParcelSystem/src/Controller/Worker.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package View;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import View.DepotMain;
+import java.io.FileWriter;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,13 +16,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ParcelsToProcessPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ParcelsToProcessPanel
-     */
+  
     public ParcelsToProcessPanel() {
-        loadDataToTable();
+       
         initComponents();
+         SwingUtilities.invokeLater(() -> loadDataToTable());
     }
+    
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,6 +38,7 @@ public class ParcelsToProcessPanel extends javax.swing.JPanel {
         tbl_parcel = new javax.swing.JTable();
         btn_addParcel = new javax.swing.JButton();
         btn_refresh = new javax.swing.JButton();
+        btn_dltP = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -82,27 +85,69 @@ public class ParcelsToProcessPanel extends javax.swing.JPanel {
                 btn_refreshActionPerformed(evt);
             }
         });
-        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, -1, -1));
+        add(btn_refresh, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, -1, -1));
+
+        btn_dltP.setText("Delete");
+        btn_dltP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dltPActionPerformed(evt);
+            }
+        });
+        add(btn_dltP, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_addParcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addParcelActionPerformed
-        // TODO add your handling code here:
+       
+    addParcelDetails dialog = new  addParcelDetails((JFrame) SwingUtilities.getWindowAncestor(this), true);
+    dialog.setLocationRelativeTo(this);
+    dialog.setVisible(true);
     }//GEN-LAST:event_btn_addParcelActionPerformed
 
     private void btn_refreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_refreshActionPerformed
-        // TODO add your handling code here:
+       loadDataToTable();
     }//GEN-LAST:event_btn_refreshActionPerformed
+
+    private void btn_dltPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dltPActionPerformed
+        // Get the selected row from the table
+    int selectedRow = tbl_parcel.getSelectedRow();
+
+    if (selectedRow == -1) {
+        // If no row is selected, show an error message
+        JOptionPane.showMessageDialog(this, "Please select a parcel to delete.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Get the Parcel ID of the selected row (assuming Parcel ID is in column 0)
+    String parcelID = tbl_parcel.getValueAt(selectedRow, 0).toString();
+
+    // Confirm deletion
+    int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete parcel " + parcelID + "?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+    if (confirm == JOptionPane.NO_OPTION) {
+        return; // If user clicks 'No', do nothing
+    }
+
+    // Remove the selected row from the table
+    DefaultTableModel model = (DefaultTableModel) tbl_parcel.getModel();
+    model.removeRow(selectedRow);
+
+    // Log the deletion activity
+    logActivity("Deleted parcel: " + parcelID + " at " + java.time.LocalDateTime.now());
+
+    // Optionally, update the CSV file if you need to reflect this change
+    updateCSVFile();
+    }//GEN-LAST:event_btn_dltPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addParcel;
+    private javax.swing.JButton btn_dltP;
     private javax.swing.JButton btn_refresh;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_parcel;
+    public javax.swing.JTable tbl_parcel;
     // End of variables declaration//GEN-END:variables
    
     public void loadDataToTable(){
-       String filePath = "Parcels.csv";  // Path to the CSV file
+       String filePath = "resources/Parcels.csv";  // Path to the CSV file
        DefaultTableModel model = (DefaultTableModel) tbl_parcel.getModel();
 
     // Clear existing rows in the table
@@ -132,5 +177,36 @@ public class ParcelsToProcessPanel extends javax.swing.JPanel {
     }
     
     }
+    
+    // Method to log the deletion event to a log file
+private void logActivity(String message) {
+    try (FileWriter logWriter = new FileWriter("resources/logfile.txt", true)) {
+        logWriter.append(message).append("\n");
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error writing to log file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
 
+// Method to update the CSV file after deletion (Optional)
+  private void updateCSVFile() {
+    // You may re-write the table data to the CSV file after deletion
+    try (FileWriter writer = new FileWriter("resources/Parcels.csv")) {
+        DefaultTableModel model = (DefaultTableModel) tbl_parcel.getModel();
+        int rowCount = model.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String parcelID = model.getValueAt(i, 0).toString();
+            String daysInDepot = model.getValueAt(i, 1).toString();
+            String weight = model.getValueAt(i, 2).toString();
+            String length = model.getValueAt(i, 3).toString();
+            String width = model.getValueAt(i, 4).toString();
+            String height = model.getValueAt(i, 5).toString();
+         
+
+            String csvLine = String.format("%s,%s,%s,%s,%s,%s", parcelID,daysInDepot, weight, length,  width, height);
+            writer.append(csvLine).append("\n");
+        }
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error updating CSV file: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+  }
 }
