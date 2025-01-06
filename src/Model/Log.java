@@ -1,23 +1,15 @@
-package Model;
+package model;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-
+import java.io.*;
 
 public class Log {
-  // Singleton instance
-    private static Log instance;
-    
-    // StringBuilder to hold log entries
-    private StringBuilder logEntries;
+     private static Log instance;
+     private StringBuilder logBuffer;
 
-      // Private constructor to prevent instantiation
-    private Log(){
-        logEntries = new StringBuilder();
+    private Log() {
+        logBuffer = new StringBuilder();
     }
 
-    // Public method to get the single instance of the Log class
     public static Log getInstance() {
         if (instance == null) {
             instance = new Log();
@@ -25,23 +17,25 @@ public class Log {
         return instance;
     }
 
-    // Method to add a new log entry
-    public void addEntry(String entry) {
-        if (entry != null && !entry.isEmpty()) {
-            logEntries.append(LocalDateTime.now()).append(" - ").append(entry).append("\n");
-            System.out.println("Log Entry Added: " + entry);
-        } else {
-            System.out.println("Invalid Log Entry!");
-        }
+    public void addLog(String logEntry) {
+        logBuffer.append(logEntry).append("\n");
     }
 
-    // Method to write log entries to a file
-    public void writeToFile(String filename) {
-        try (FileWriter writer = new FileWriter(filename)) {
-            writer.write(logEntries.toString());
-            System.out.println("Log written to file: " + filename);
+    public String getLogs() {
+        return logBuffer.toString();
+    }
+
+    public void clearLogs() {
+        logBuffer.setLength(0);
+    }
+
+
+    public void writeToFile(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName, true)) { // 'true' for appending to the file
+            writer.write(logBuffer.toString());
+            logBuffer.setLength(0);  // Clear the buffer after writing to file
         } catch (IOException e) {
-            System.out.println("Error writing to log file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

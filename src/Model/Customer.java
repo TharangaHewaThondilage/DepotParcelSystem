@@ -1,47 +1,40 @@
-package Model;
+package model;
 
 public class Customer {
-    private int CustomerQueueNo;
+    
+    private String customerId;
     private String name;
-    private String ParcelID;
+    private String parcelId;
 
     public Customer() {
     }
-
-    public Customer(int CustomerQueueNo, String name, String ParcelID) {
-        this.CustomerQueueNo = CustomerQueueNo;
+    
+    
+    public Customer(String customerId, String name, String parcelId) {
+        this.customerId = customerId;
         this.name = name;
-        this.ParcelID = ParcelID;
+        this.parcelId = parcelId;
     }
 
-    public int getCustomerQueueNo() {
-        return CustomerQueueNo;
-    }
-
-    public void setCustomerQueueNo(int CustomerQueueNo) {
-        this.CustomerQueueNo = CustomerQueueNo;
+    public String getCustomerId() {
+        return customerId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getParcelID() {
-        return ParcelID;
-    }
-
-    public void setParcelID(String ParcelID) {
-        this.ParcelID = ParcelID;
+    public String getParcelId() {
+        return parcelId;
     }
 
     @Override
     public String toString() {
-        return "Customer{" + "CustomerQueueNo=" + CustomerQueueNo + ", name=" + name + ", ParcelID=" + ParcelID + '}';
+        return "Customer [ID=" + customerId + ", Name=" + name + ", ParcelID=" + parcelId + "]";
     }
     
+      public String toCSV() {
+        return customerId + "," + name + "," + parcelId;
+    }
     
 }

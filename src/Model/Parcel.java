@@ -1,96 +1,105 @@
-package Model;
+package model;
 
 public class Parcel {
-    private String ParcelID;
-    private String Dimentions;
-    private float weight;
-    private int DaysinDepot;
-    private String Status;
-    private boolean collected;
+    
+   private String parcelId;
+    private int daysInDepot;
+    private double weight;
+    private double length;
+    private double width;
+    private double height;
+    private String dimention;
 
     public Parcel() {
     }
-
-    public Parcel(String ParcelID, String Dimentions, float weight, int DaysinDepot, String Status ,boolean collected) {
-        this.ParcelID = ParcelID;
-        this.Dimentions = Dimentions;
+    
+    public Parcel(String parcelId, int daysInDepot, double weight, double length, double width, double height) {
+        this.parcelId = parcelId;
+        this.daysInDepot = daysInDepot;
         this.weight = weight;
-        this.DaysinDepot = DaysinDepot;
-        this.Status = Status;
-        this.collected =false;
+        this.length = length;
+        this.width = width;
+        this.height = height;
     }
 
-    public Parcel( float weight, int DaysinDepot) {
-       
+    public Parcel(String parcelId, double weight, String dimention) {
+        this.parcelId = parcelId;
         this.weight = weight;
-        this.DaysinDepot = DaysinDepot;
+        this.dimention = dimention;
     }
+
     
     
+    
 
-    public String getParcelID() {
-        return ParcelID;
+    // Getters
+    public String getParcelId() {
+        return parcelId;
     }
 
-    public void setParcelID(String ParcelID) {
-        this.ParcelID = ParcelID;
+    public int getDaysInDepot() {
+        return daysInDepot;
     }
 
-    public String getDimentions() {
-        return Dimentions;
-    }
-
-    public void setDimentions(String Dimentions) {
-        this.Dimentions = Dimentions;
-    }
-
-    public float getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public double getLength() {
+        return length;
     }
 
-    public int getDaysinDepot() {
-        return DaysinDepot;
+    public double getWidth() {
+        return width;
     }
 
-    public void setDaysinDepot(int DaysinDepot) {
-        this.DaysinDepot = DaysinDepot;
+    public double getHeight() {
+        return height;
     }
 
-    public String getStatus() {
-        return Status;
+    // Setters (if required)
+    public void setDaysInDepot(int daysInDepot) {
+        this.daysInDepot = daysInDepot;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    // Method to calculate volume
+    public double calculateVolume() {
+        return length * width * height;
     }
+
+    public String getDimention() {
+        return dimention;
+    }
+
+    public void setDimention(String dimention) {
+        this.dimention = dimention;
+    }
+     
     
- 
-    public boolean isCollected() {
-        return collected;
-    }
-
-    public void setCollected(boolean collected) {
-        this.collected = collected;
-    }
     
-       
-   /* public float calculatefee(){
-      return ; 
-    }*/
-    
-   /* public String UpdateStatus(){
-        return;
-    } */
-
     @Override
     public String toString() {
-        return "Parcel{" + "ParcelID=" + ParcelID + ", Dimentions=" + Dimentions + ", weight=" + weight + ", DaysinDepot=" + DaysinDepot + ", Status=" + Status + ", collected=" + collected + '}';
+        return "Parcel[ID=" + parcelId + ", DaysInDepot=" + daysInDepot + 
+               ", Weight=" + weight + ", Dimensions=" + length + "x" + width + "x" + height + "]";
     }
     
-    
+     public String toCSV() {
+        return parcelId + "," + daysInDepot + "," + weight + "," + length + "," + width + "," + height;
+    }
+     
+     public double calculateFee() {
+        double baseFee = 50.0;
+        double weightFee = this.weight * 10; 
+        double sizeFee = (this.length * this.width * this.height) / 5000; 
+
+   
+       double fee = baseFee + weightFee + sizeFee;
+
+        if (fee > 100) {
+           fee *= 0.9;
+       }
+
+      return fee;
+}
 
 }
